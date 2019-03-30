@@ -1,13 +1,12 @@
-package yadong0305.algorithms.search;
+package yadong0305.algorithms.ST;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * 顺序查找：在查找中一个一个地顺序遍历符号表中的所有键并使用equals()方法来寻找与被查找地键匹配的键
  */
 
-public class SequentialSearchST<Key, Value>
+public class SequentialSearchST<Key, Value> extends ST<Key, Value>
 {
     private Node first;
     private int n;
@@ -44,8 +43,6 @@ public class SequentialSearchST<Key, Value>
 
     /**
      * 遍历链表，用equals()方法比较需被查找的键和每个结点中的键，如果匹配成功就用第二个参数指定的值更新和该键相关联的值，否则用给定的键值对创建一个新的结点并将其插入到链表的开头
-     * @param key
-     * @param value
      */
     public void put(Key key, Value value) {
         if (value == null) {
@@ -90,15 +87,14 @@ public class SequentialSearchST<Key, Value>
         }
     }
 
-    public static void main(String[] args) {
-        SequentialSearchST<String, Integer> st = new SequentialSearchST<>();
-        Scanner scanner = new Scanner(System.in);
-        for (int i = 0; scanner.hasNext(); i++) {
-            st.put(scanner.next(), i);
-        }
-        for (String key: st.keys()) {
-            System.out.println(key + " " + st.get(key));
-        }
+    @Override
+    public boolean contains(Key key) {
+        return get(key) == null;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return n == 0;
     }
 
 }
